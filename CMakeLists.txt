@@ -6,9 +6,12 @@ if (POLICY CMP0141)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
 
-project ("LoomianLegacyAutomation")
+project(LoomianLegacyAutomation)
 
-add_executable (LoomianLegacyAutomation "LoomianLegacyAutomation.cpp" )
+add_subdirectory(externals/robot-cpp)
+
+add_executable(LoomianLegacyAutomation LoomianLegacyAutomation.cpp)
+target_link_libraries(LoomianLegacyAutomation PUBLIC RobotCPP)
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET LoomianLegacyAutomation PROPERTY CXX_STANDARD 20)
